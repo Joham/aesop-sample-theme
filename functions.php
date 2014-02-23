@@ -34,7 +34,8 @@ class ASTFunctions {
 
 new ASTFunctions;
 
-// rename posts to stories in admin
+
+//Change post to stories in the admin
 
 function change_post_label() {
 
@@ -49,6 +50,8 @@ function change_post_label() {
 }
 
 add_action( 'admin_menu', 'change_post_label' );
+
+
 
 function change_post_object() {
 
@@ -69,5 +72,29 @@ function change_post_object() {
     $labels->name_admin_bar = 'Stories';
 
 }
- 
+
 add_action( 'init', 'change_post_object' );
+
+
+// remove unwanted items from menu // https://codex.wordpress.org/Function_Reference/remove_menu_page
+
+function remove_menu_items() {
+
+    remove_menu_page( 'index.php' );
+    remove_menu_page( 'separator1' ); 
+    remove_menu_page( 'upload.php' );
+    remove_menu_page( 'edit.php?post_type=page' ); 
+    remove_menu_page( 'edit-comments.php' );          
+
+}
+
+add_action( 'admin_menu', 'remove_menu_items' );
+
+// damn the dashboard and redirect to clean layout of http://wordpress.org/plugins/hierarchy/
+function change_landing_page() {
+ 
+    return admin_url( 'admin.php?page=hierarchy' );
+ 
+}
+ 
+add_filter( 'login_redirect', 'change_landing_page' );
