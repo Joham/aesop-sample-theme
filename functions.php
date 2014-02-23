@@ -34,7 +34,7 @@ class ASTFunctions {
 
 new ASTFunctions;
 
-
+// rename posts to stories in admin
 
 function change_post_label() {
 
